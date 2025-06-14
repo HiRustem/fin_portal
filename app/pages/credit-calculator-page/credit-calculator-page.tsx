@@ -1,11 +1,7 @@
-import { CreditCalculatorForm } from "~/components";
+import { CreditCalculatorForm } from '~/components';
 
 const CreditCalculatorPage = () => {
-  return (
-    <>
-      <CreditCalculatorForm />
-    </>
-  );
+  return <CreditCalculatorForm />;
 };
 
 export default CreditCalculatorPage;

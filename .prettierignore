@@ -1,0 +1,7 @@
+# common
+node_modules
+.idea
+.husky
+src/shared/i18n/locales
+public
+./package.json
