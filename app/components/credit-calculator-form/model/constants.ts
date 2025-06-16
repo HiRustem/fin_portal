@@ -5,17 +5,54 @@ import { getCreditStartDate } from '../lib/date-helpers';
 export const creditAmountRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditAmount'
-> = {};
+> = {
+  required: {
+    value: true,
+    message: '* Обязательное поле',
+  },
+  minLength: {
+    value: 4,
+    message: '* Минимальное число символов - 4',
+  },
+};
 
 export const creditPercentRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditPercent'
-> = {};
+> = {
+  required: {
+    value: true,
+    message: '* Обязательное поле',
+  },
+};
 
 export const creditPeriodRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditPeriod'
+> = {
+  required: {
+    value: true,
+    message: '* Обязательное поле',
+  },
+  maxLength: {
+    value: 4,
+    message: '* Максимальное количество символов - 4',
+  },
+};
+
+export const creditStartDateRules: CreditCalculatorFormFieldRules<
+  CreditCalculatorFormState,
+  'creditStartDate'
 > = {};
+
+export const creditRepaymentTypeRules: CreditCalculatorFormFieldRules<
+  CreditCalculatorFormState,
+  'creditRepaymentType'
+> = {};
+
+export const validateNumberValue = (value: string) => {
+  return value.match(/\d/g)?.join('') || '';
+};
 
 type CreditCalculatorFormFieldRules<
   TFieldValues extends FieldValues,

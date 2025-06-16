@@ -15,7 +15,21 @@ interface Payment {
   balance: number;
 }
 
-export function calculateAnnuitySchedule(params: CreditParams): Payment[] {
+interface CreditScheduleResult {
+  schedule: Payment[];
+  totalPayments: number;
+  overpayment: number;
+  fullCostPercent: number;
+}
+
+function finalizeSummary(amount: number, totalPayments: number) {
+  const overpayment = +(totalPayments - amount).toFixed(2);
+  const fullCostPercent = +((totalPayments / amount - 1) * 100).toFixed(3);
+
+  return { totalPayments, overpayment, fullCostPercent };
+}
+
+export function calculateAnnuitySchedule(params: CreditParams): CreditScheduleResult {
   const { amount, percent, period, startDate } = params;
 
   const startDateISO = convertDateDDMMYYYYtoISO(startDate);
@@ -27,6 +41,7 @@ export function calculateAnnuitySchedule(params: CreditParams): Payment[] {
   const schedule: Payment[] = [];
   let balance = amount;
   let prevDate = new Date(startDateISO);
+  let totalPayments = 0;
 
   schedule.push({
     date: prevDate.toISOString().slice(0, 10),
@@ -46,28 +61,34 @@ export function calculateAnnuitySchedule(params: CreditParams): Payment[] {
 
     const interest = +(((balance * (percent / 100)) / 365) * daysInPeriod).toFixed(2);
     const principal = +(monthlyPayment - interest).toFixed(2);
+    const total = +(interest + principal).toFixed(2);
+    totalPayments += total;
     balance = +(balance - principal).toFixed(2);
     prevDate = currentDate;
 
     schedule.push({
       date: currentDate.toISOString().slice(0, 10),
-      total: +(interest + principal).toFixed(2),
+      total,
       interest,
       principal,
       balance: balance > 0.01 ? balance : 0,
     });
   }
 
-  return schedule;
+  return {
+    schedule,
+    ...finalizeSummary(amount, +totalPayments.toFixed(2)),
+  };
 }
 
-export function calculateDifferentiatedSchedule(params: CreditParams): Payment[] {
+export function calculateDifferentiatedSchedule(params: CreditParams): CreditScheduleResult {
   const { amount, percent, period, startDate } = params;
   const monthlyPrincipal = +(amount / period).toFixed(2);
   const startDateISO = convertDateDDMMYYYYtoISO(startDate);
   const schedule: Payment[] = [];
   let balance = amount;
   let prevDate = new Date(startDateISO);
+  let totalPayments = 0;
 
   schedule.push({
     date: prevDate.toISOString().slice(0, 10),
@@ -87,6 +108,7 @@ export function calculateDifferentiatedSchedule(params: CreditParams): Payment[]
 
     const interest = +(((balance * (percent / 100)) / 365) * daysInPeriod).toFixed(2);
     const total = +(monthlyPrincipal + interest).toFixed(2);
+    totalPayments += total;
     balance = +(balance - monthlyPrincipal).toFixed(2);
     prevDate = currentDate;
 
@@ -99,5 +121,8 @@ export function calculateDifferentiatedSchedule(params: CreditParams): Payment[]
     });
   }
 
-  return schedule;
+  return {
+    schedule,
+    ...finalizeSummary(amount, +totalPayments.toFixed(2)),
+  };
 }

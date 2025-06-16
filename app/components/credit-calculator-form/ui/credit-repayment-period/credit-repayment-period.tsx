@@ -1,5 +1,5 @@
 import { Label } from '../../../ui/label';
-import { InputHTMLAttributes, useState } from 'react';
+import { useState } from 'react';
 import { Input } from '~/components/ui/input';
 import {
   Select,
@@ -8,11 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
-import { CreditPeriodType } from '../../model/types';
+import { CreditCalculatorFormState, CreditPeriodType } from '../../model/types';
 import { useMediaQuery } from '~/lib/utils';
 import { DrawerComponent, DrawerTrigger } from '~/components/ui/drawer';
 import { Button } from '~/components/ui/button';
 import { ChevronDown } from 'lucide-react';
+import { NumericFormat } from 'react-number-format';
+import FormFieldError from '~/components/ui/error';
+import { ControllerFieldState, ControllerRenderProps } from 'react-hook-form';
 
 const creditPeriodTypes = new Map<CreditPeriodType, string>()
   .set('months', 'месяца')
@@ -22,14 +25,16 @@ interface ICreditRepaymentPeriod {
   defaultPeriodTypeValue: CreditPeriodType;
   periodTypeValue: CreditPeriodType;
   onChangePeriodType: (value: CreditPeriodType) => void;
-  inputProps?: InputHTMLAttributes<HTMLInputElement>;
+  field: ControllerRenderProps<CreditCalculatorFormState, 'creditPeriod'>;
+  fieldState: ControllerFieldState;
 }
 
 const CreditRepaymentPeriod = ({
   defaultPeriodTypeValue,
-  inputProps,
   periodTypeValue,
   onChangePeriodType,
+  field,
+  fieldState,
 }: ICreditRepaymentPeriod) => {
   const isTabletS = useMediaQuery('(max-width: 576px)');
 
@@ -37,9 +42,20 @@ const CreditRepaymentPeriod = ({
 
   return (
     <div>
-      <Label htmlFor={inputProps?.id}>Срок кредита/займа</Label>
+      <Label htmlFor='credit-period-input'>Срок кредита/займа</Label>
+
       <div className='flex gap-2'>
-        <Input {...inputProps} />
+        <div className='flex flex-col gap-2 w-full'>
+          <NumericFormat
+            customInput={Input}
+            id='credit-period-input'
+            name='creditPeriod'
+            onChange={field.onChange}
+            value={field.value}
+          />
+
+          <FormFieldError error={fieldState?.error?.message} />
+        </div>
 
         {isTabletS ? (
           <DrawerComponent
