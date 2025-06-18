@@ -121,19 +121,19 @@ const DrawerComponent = <KeyType,>({
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
-          <div className='p-4 pb-0'>
-            <div className='mt-3'>
+          <div className='p-4 pb-4'>
+            <div className='flex flex-col gap-2 mt-3 mb-3'>
               {Array.from(valuesMap.keys()).map((typeItem) => (
-                <button
+                <Button
                   key={typeItem as React.Key}
-                  className='cursor-pointer p-2 hover:bg-muted'
+                  variant='outline'
                   onClick={() => {
                     onSelect(typeItem);
                     setIsOpen(false);
                   }}
                 >
                   {valuesMap.get(typeItem)}
-                </button>
+                </Button>
               ))}
             </div>
           </div>

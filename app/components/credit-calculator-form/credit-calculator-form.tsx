@@ -15,9 +15,7 @@ import CreditRepaymentStartDate from './ui/credit-repayment-start-date/credit-re
 import CreditRepaymentTypeSelect from './ui/credit-repayment-type/credit-repayment-type';
 import { Button } from '../ui/button';
 import { calculateAnnuitySchedule, calculateDifferentiatedSchedule } from './lib/credit-helpers';
-import FormFieldError from '../ui/error';
 import { NumericFormat } from 'react-number-format';
-
 const CreditCalculatorForm = () => {
   const methods = useForm({
     mode: 'onChange',
@@ -83,9 +81,8 @@ const CreditCalculatorForm = () => {
                   decimalScale={0}
                   fixedDecimalScale
                   thousandSeparator=' '
+                  error={fieldState?.error?.message}
                 />
-
-                <FormFieldError error={fieldState?.error?.message} />
               </div>
             );
           }}
@@ -111,9 +108,8 @@ const CreditCalculatorForm = () => {
                   decimalScale={2}
                   fixedDecimalScale
                   customInput={Input}
+                  error={fieldState?.error?.message}
                 />
-
-                <FormFieldError error={fieldState?.error?.message} />
               </div>
             );
           }}
@@ -142,8 +138,14 @@ const CreditCalculatorForm = () => {
           name='creditStartDate'
           rules={creditStartDateRules}
           control={methods.control}
-          render={({ field }) => {
-            return <CreditRepaymentStartDate value={field.value} onChange={field.onChange} />;
+          render={({ field, fieldState }) => {
+            return (
+              <CreditRepaymentStartDate
+                value={field.value}
+                onChange={field.onChange}
+                error={fieldState.error?.message}
+              />
+            );
           }}
         />
 

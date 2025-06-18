@@ -14,7 +14,6 @@ import { DrawerComponent, DrawerTrigger } from '~/components/ui/drawer';
 import { Button } from '~/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 import { NumericFormat } from 'react-number-format';
-import FormFieldError from '~/components/ui/error';
 import { ControllerFieldState, ControllerRenderProps } from 'react-hook-form';
 
 const creditPeriodTypes = new Map<CreditPeriodType, string>()
@@ -52,9 +51,8 @@ const CreditRepaymentPeriod = ({
             name='creditPeriod'
             onChange={field.onChange}
             value={field.value}
+            error={fieldState?.error?.message}
           />
-
-          <FormFieldError error={fieldState?.error?.message} />
         </div>
 
         {isTabletS ? (

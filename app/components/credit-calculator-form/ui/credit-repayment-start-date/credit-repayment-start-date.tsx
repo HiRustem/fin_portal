@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { getCreditStartDate, isValidDate } from '../../lib/date-helpers';
+import {
+  convertDateDDMMYYYYtoISO,
+  getCreditStartDate,
+  isValidDate,
+  isValidDateString,
+} from '../../lib/date-helpers';
 import { Label } from '~/components/ui/label';
 import { Input } from '~/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
@@ -19,9 +24,10 @@ import { useMediaQuery } from '~/lib/utils';
 interface ICreditRepaymentStartDate {
   value: string;
   onChange: (value: string) => void;
+  error?: string;
 }
 
-const CreditRepaymentStartDate = ({ value, onChange }: ICreditRepaymentStartDate) => {
+const CreditRepaymentStartDate = ({ value, onChange, error }: ICreditRepaymentStartDate) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
   const [month, setMonth] = useState<Date>(date);
@@ -35,27 +41,36 @@ const CreditRepaymentStartDate = ({ value, onChange }: ICreditRepaymentStartDate
       </Label>
 
       <div className='relative flex gap-2'>
-        <Input
-          id='date'
-          name='creditStartDate'
-          value={value}
-          placeholder='01.01.2001'
-          className='bg-background pr-10'
-          onChange={(e) => {
-            const date = new Date(getCreditStartDate(new Date(e.target.value)));
-            onChange(e.target.value);
-            if (isValidDate(date)) {
-              setDate(date);
-              setMonth(date);
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'ArrowDown') {
-              e.preventDefault();
-              setOpen(true);
-            }
-          }}
-        />
+        <div className='flex flex-col gap-2 w-full'>
+          <Input
+            id='date'
+            name='creditStartDate'
+            value={value}
+            placeholder='01.01.2001'
+            className='bg-background pr-10 w-full'
+            onChange={(e) => {
+              onChange(e.target.value);
+
+              if (!isValidDateString(e.target.value)) return;
+
+              const convertedDate = convertDateDDMMYYYYtoISO(e.target.value);
+
+              const date = new Date(convertedDate);
+
+              if (isValidDate(date)) {
+                setDate(date);
+                setMonth(date);
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setOpen(true);
+              }
+            }}
+            error={error}
+          />
+        </div>
 
         {isTabletS ? (
           <Drawer open={open} onOpenChange={setOpen}>
@@ -94,11 +109,7 @@ const CreditRepaymentStartDate = ({ value, onChange }: ICreditRepaymentStartDate
         ) : (
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-              <Button
-                id='date-picker'
-                variant='ghost'
-                className='absolute top-1/2 right-2 size-6 -translate-y-1/2'
-              >
+              <Button id='date-picker' variant='ghost' className='absolute top-0 right-0'>
                 <CalendarIcon className='size-3.5' />
               </Button>
             </PopoverTrigger>

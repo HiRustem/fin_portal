@@ -1,15 +1,17 @@
 import { FieldValue, FieldValues, RegisterOptions } from 'react-hook-form';
 import { CreditCalculatorFormState } from './types';
-import { getCreditStartDate } from '../lib/date-helpers';
+import { dateStringRegex, getCreditStartDate } from '../lib/date-helpers';
+
+const requiredRule = {
+  value: true,
+  message: '* Обязательное поле',
+};
 
 export const creditAmountRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditAmount'
 > = {
-  required: {
-    value: true,
-    message: '* Обязательное поле',
-  },
+  required: requiredRule,
   minLength: {
     value: 4,
     message: '* Минимальное число символов - 4',
@@ -20,20 +22,14 @@ export const creditPercentRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditPercent'
 > = {
-  required: {
-    value: true,
-    message: '* Обязательное поле',
-  },
+  required: requiredRule,
 };
 
 export const creditPeriodRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditPeriod'
 > = {
-  required: {
-    value: true,
-    message: '* Обязательное поле',
-  },
+  required: requiredRule,
   maxLength: {
     value: 4,
     message: '* Максимальное количество символов - 4',
@@ -43,7 +39,13 @@ export const creditPeriodRules: CreditCalculatorFormFieldRules<
 export const creditStartDateRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
   'creditStartDate'
-> = {};
+> = {
+  pattern: {
+    value: dateStringRegex,
+    message: 'Введите дату вида 01.01.2001',
+  },
+  required: requiredRule,
+};
 
 export const creditRepaymentTypeRules: CreditCalculatorFormFieldRules<
   CreditCalculatorFormState,
