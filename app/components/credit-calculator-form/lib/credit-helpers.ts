@@ -1,26 +1,6 @@
+import { CreditParams, CreditScheduleResult, Payment } from '../model/types';
 import { convertDateDDMMYYYYtoISO } from './date-helpers';
 
-interface CreditParams {
-  amount: number;
-  percent: number;
-  period: number;
-  startDate: string;
-}
-
-interface Payment {
-  date: string;
-  total: number;
-  interest: number;
-  principal: number;
-  balance: number;
-}
-
-interface CreditScheduleResult {
-  schedule: Payment[];
-  totalPayments: number;
-  overpayment: number;
-  fullCostPercent: number;
-}
 
 function finalizeSummary(amount: number, totalPayments: number) {
   const overpayment = +(totalPayments - amount).toFixed(2);

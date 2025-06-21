@@ -1,0 +1,1 @@
+export { default as CreditRepaymentSchedule } from './credit-repayment-schedule';

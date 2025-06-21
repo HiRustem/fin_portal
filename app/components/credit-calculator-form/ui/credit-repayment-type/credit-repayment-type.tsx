@@ -33,7 +33,7 @@ const CreditRepaymentTypeSelect = ({
 
   if (isTabletS) {
     return (
-      <div className='flex gap-2 items-center'>
+      <div className='flex flex-col gap-2'>
         <Label>Порядок погашения</Label>
 
         <DrawerComponent<CreditRepaymentType>
@@ -50,7 +50,7 @@ const CreditRepaymentTypeSelect = ({
   }
 
   return (
-    <div>
+    <div className='flex flex-col gap-2'>
       <Label htmlFor='credit-repayment-type'>Порядок погашения</Label>
       <Select
         open={isOpen}
@@ -61,7 +61,7 @@ const CreditRepaymentTypeSelect = ({
           onChangeRepaymentType(value as CreditRepaymentType);
         }}
       >
-        <SelectTrigger className='w-[180px]'>
+        <SelectTrigger className='w-full'>
           <SelectValue defaultChecked defaultValue={defaultRepaymentTypeValue} />
         </SelectTrigger>
 

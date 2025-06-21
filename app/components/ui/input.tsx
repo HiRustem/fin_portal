@@ -7,6 +7,8 @@ interface IInputError {
 }
 
 const InputError = ({ error }: IInputError) => {
+  if (!error) return null;
+
   return (
     <p
       className={cn(

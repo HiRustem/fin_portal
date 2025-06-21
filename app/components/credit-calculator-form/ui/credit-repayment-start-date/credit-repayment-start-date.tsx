@@ -35,7 +35,7 @@ const CreditRepaymentStartDate = ({ value, onChange, error }: ICreditRepaymentSt
   const isTabletS = useMediaQuery('(max-width: 576px)');
 
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-2'>
       <Label htmlFor='date' className='px-1'>
         Дата выдачи
       </Label>

@@ -16,7 +16,10 @@ import CreditRepaymentTypeSelect from './ui/credit-repayment-type/credit-repayme
 import { Button } from '../ui/button';
 import { calculateAnnuitySchedule, calculateDifferentiatedSchedule } from './lib/credit-helpers';
 import { NumericFormat } from 'react-number-format';
+import useCreditCalculatorFormStore from './model/store';
 const CreditCalculatorForm = () => {
+  const setSchedule = useCreditCalculatorFormStore((state) => state.setSchedule)
+
   const methods = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -44,6 +47,8 @@ const CreditCalculatorForm = () => {
         startDate,
       });
 
+      setSchedule({ ...result });
+
       console.log('annutiy', result);
     } else {
       const result = calculateDifferentiatedSchedule({
@@ -53,20 +58,22 @@ const CreditCalculatorForm = () => {
         startDate,
       });
 
+      setSchedule({ ...result });
+
       console.log('differentiate', result);
     }
   };
 
   return (
     <FormProvider {...methods}>
-      <form className='' onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className='max-w-[550px] flex flex-col gap-2 max-[576px]:max-w-full w-full mx-auto' onSubmit={methods.handleSubmit(onSubmit)}>
         <Controller
           name='creditAmount'
           rules={creditAmountRules}
           control={methods.control}
           render={({ field, fieldState }) => {
             return (
-              <div>
+              <div className='flex flex-col gap-2'>
                 <Label htmlFor='credit-amount-input'>Сумма кредита/займа</Label>
 
                 <NumericFormat
@@ -94,7 +101,7 @@ const CreditCalculatorForm = () => {
           control={methods.control}
           render={({ field, fieldState }) => {
             return (
-              <div>
+              <div className='flex flex-col gap-2'>
                 <Label htmlFor='credit-percent-input'>Процентная ставка, % годовых</Label>
 
                 <NumericFormat
@@ -164,7 +171,7 @@ const CreditCalculatorForm = () => {
           }}
         />
 
-        <Button disabled={!methods.formState.isValid} type='submit' variant='outline'>
+        <Button className='mt-4' disabled={!methods.formState.isValid} type='submit' variant='outline'>
           Посчитать
         </Button>
       </form>
