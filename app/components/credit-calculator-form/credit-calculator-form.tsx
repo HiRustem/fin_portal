@@ -18,7 +18,7 @@ import { calculateAnnuitySchedule, calculateDifferentiatedSchedule } from './lib
 import { NumericFormat } from 'react-number-format';
 import useCreditCalculatorFormStore from './model/store';
 const CreditCalculatorForm = () => {
-  const setSchedule = useCreditCalculatorFormStore((state) => state.setSchedule)
+  const setSchedule = useCreditCalculatorFormStore((state) => state.setSchedule);
 
   const methods = useForm({
     mode: 'onChange',
@@ -66,7 +66,10 @@ const CreditCalculatorForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className='max-w-[550px] flex flex-col gap-2 max-[576px]:max-w-full w-full mx-auto' onSubmit={methods.handleSubmit(onSubmit)}>
+      <form
+        className='max-w-[550px] flex flex-col gap-2 max-[576px]:max-w-full w-full mx-auto'
+        onSubmit={methods.handleSubmit(onSubmit)}
+      >
         <Controller
           name='creditAmount'
           rules={creditAmountRules}
@@ -171,7 +174,12 @@ const CreditCalculatorForm = () => {
           }}
         />
 
-        <Button className='mt-4' disabled={!methods.formState.isValid} type='submit' variant='outline'>
+        <Button
+          className='mt-4'
+          disabled={!methods.formState.isValid}
+          type='submit'
+          variant='outline'
+        >
           Посчитать
         </Button>
       </form>

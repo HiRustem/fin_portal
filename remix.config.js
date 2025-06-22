@@ -1,5 +1,11 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-  serverBuildTarget: 'netlify',
-  server: './server.js',
+  future: {
+    v3_routeConvention: true,
+  },
+  server: '@remix-run/netlify',
+  serverBuildPath: 'netlify/entry.server.js',
+  appDirectory: 'app',
+  publicPath: '/build/',
+  assetsBuildDirectory: 'public/build',
 };
