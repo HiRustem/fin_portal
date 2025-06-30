@@ -85,7 +85,7 @@ const CreditRepaymentStartDate = ({ value, onChange, error }: ICreditRepaymentSt
                   <DrawerDescription>Выберите дату выдачи</DrawerDescription>
                 </DrawerHeader>
 
-                <div className='flex items-center justify-center p-4 pb-4'>
+                <div className='flex items-center justify-center p-4 pb-14'>
                   <Calendar
                     mode='single'
                     selected={date}
