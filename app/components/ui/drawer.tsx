@@ -121,7 +121,7 @@ const DrawerComponent = <KeyType,>({
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
-          <div className='p-4 pb-4'>
+          <div className='p-4 pb-12'>
             <div className='flex flex-col gap-2 mt-3 mb-3'>
               {Array.from(valuesMap.keys()).map((typeItem) => (
                 <Button

@@ -81,7 +81,7 @@ const CreditRepaymentStartDate = ({ value, onChange, error }: ICreditRepaymentSt
             </DrawerTrigger>
 
             <DrawerContent>
-              <div className='mx-auto w-full max-w-sm'>
+              <div className='mx-auto w-full max-w-sm pb-6'>
                 <DrawerHeader>
                   <DrawerTitle>Дата выдачи</DrawerTitle>
                   <DrawerDescription>Выберите дату выдачи</DrawerDescription>

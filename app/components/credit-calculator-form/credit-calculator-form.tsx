@@ -180,7 +180,7 @@ const CreditCalculatorForm = () => {
           type='submit'
           variant='outline'
         >
-          Посчитать
+          Рассчитать
         </Button>
       </form>
     </FormProvider>
