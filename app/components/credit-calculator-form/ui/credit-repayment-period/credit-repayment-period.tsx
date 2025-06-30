@@ -40,7 +40,7 @@ const CreditRepaymentPeriod = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className='flex flex-col gap-2'>
       <Label htmlFor='credit-period-input'>Срок кредита/займа</Label>
 
       <div className='flex gap-2'>

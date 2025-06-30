@@ -36,9 +36,7 @@ const CreditRepaymentStartDate = ({ value, onChange, error }: ICreditRepaymentSt
 
   return (
     <div className='flex flex-col gap-2'>
-      <Label htmlFor='date' className='px-1'>
-        Дата выдачи
-      </Label>
+      <Label htmlFor='date'>Дата выдачи</Label>
 
       <div className='relative flex gap-2'>
         <div className='flex flex-col gap-2 w-full'>
