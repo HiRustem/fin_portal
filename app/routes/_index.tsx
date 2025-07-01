@@ -3,29 +3,29 @@ import { CreditCalculatorPage } from '~/pages';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Кредитный онлайн калькулятор' },
+    { title: 'Кредитный калькулятор — FinFormulas' },
     {
       name: 'description',
       content:
-        'Онлайн кредитный калькулятор для расчета графика платежей по кредиту. Поддержка аннуитетных и дифференцированных платежей, досрочного погашения',
+        'FinFormulas — удобные и точные финансовые калькуляторы: кредиты, ипотеки, рассрочки и многое другое.',
     },
     {
       property: 'og:title',
-      content: 'Кредитный калькулятор онлайн — расчет графика платежей по кредиту',
+      content: 'Кредитный калькулятор — FinFormulas',
     },
     {
       property: 'og:description',
       content:
-        'Быстрый и точный расчет платежей по кредиту. Рассчитайте аннуитетные и дифференцированные платежи онлайн бесплатно.',
+        'FinFormulas — удобные и точные финансовые калькуляторы: кредиты, ипотеки, рассрочки и многое другое.',
     },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: 'https://finformulas.ru/' },
     { name: 'twitter:card', content: 'summary' },
-    { name: 'twitter:title', content: 'Кредитный калькулятор онлайн' },
+    { name: 'twitter:title', content: 'Кредитный калькулятор — FinFormulas' },
     {
       name: 'twitter:description',
       content:
-        'Онлайн калькулятор для расчета графика платежей по кредиту с учетом досрочного погашения.',
+        'FinFormulas — удобные и точные финансовые калькуляторы: кредиты, ипотеки, рассрочки и многое другое.',
     },
   ];
 };

@@ -2,10 +2,10 @@ export default function StructuredData() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Кредитный онлайн калькулятор',
+    name: 'Кредитный калькулятор — FinFormulas',
     url: 'https://finformulas.ru/',
     description:
-      'Онлайн кредитный калькулятор для расчета графика платежей по кредиту. Поддержка аннуитетных и дифференцированных платежей, досрочного погашения',
+      'FinFormulas — удобные и точные финансовые калькуляторы: кредиты, ипотеки, рассрочки и многое другое.',
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'All',
     offers: {

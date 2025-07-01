@@ -1,9 +1,7 @@
 const CreditCalculatorSeoText = () => {
   return (
     <div className='w-full flex flex-col gap-2 mt-4 mx-auto max-w-[841px] text-lg pb-6'>
-      <h1 className='mb-1 font-bold'>
-        Онлайн кредитный калькулятор — точный расчет графика платежей
-      </h1>
+      <h1 className='mb-1 font-bold'>FinFormulas — удобные финансовые калькуляторы</h1>
       <p className='mb-4'>
         Наш <strong className='font-normal'>кредитный калькулятор</strong> поможет быстро и
         бесплатно рассчитать график платежей по займу или кредиту. Укажите сумму, процентную ставку,
@@ -50,7 +48,7 @@ const CreditCalculatorSeoText = () => {
         <strong className='font-normal'>график платежей по кредиту</strong>.
       </p>
 
-      <div>
+      <div className='mb-4'>
         <h3 className='font-bold mb-2'>Часто задаваемые вопросы</h3>
         <details className='mb-2'>
           <summary className='mb-1 cursor-pointer'>Что такое аннуитетный платеж?</summary>
@@ -64,6 +62,8 @@ const CreditCalculatorSeoText = () => {
           <p>Наш калькулятор пока не может учитывать частичное и полное досрочное погашение.</p>
         </details>
       </div>
+
+      <p>© 2025 FinFormulas. Все права защищены.</p>
     </div>
   );
 };
