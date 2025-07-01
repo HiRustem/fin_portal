@@ -3,11 +3,11 @@ import { CreditCalculatorPage } from '~/pages';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Кредитный калькулятор онлайн — расчет графика платежей по кредиту быстро и точно' },
+    { title: 'Кредитный онлайн калькулятор' },
     {
       name: 'description',
       content:
-        'Онлайн кредитный калькулятор для точного расчета графика платежей по кредиту. Поддержка аннуитетных и дифференцированных платежей. Здесь подробный график платежей по вашему кредиту!',
+        'Онлайн кредитный калькулятор для расчета графика платежей по кредиту. Поддержка аннуитетных и дифференцированных платежей, досрочного погашения',
     },
     {
       property: 'og:title',
@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
         'Быстрый и точный расчет платежей по кредиту. Рассчитайте аннуитетные и дифференцированные платежи онлайн бесплатно.',
     },
     { property: 'og:type', content: 'website' },
-    // { property: 'og:url', content: 'https://yourdomain.ru/' },
+    { property: 'og:url', content: 'https://finformulas.ru/' },
     { name: 'twitter:card', content: 'summary' },
     { name: 'twitter:title', content: 'Кредитный калькулятор онлайн' },
     {
